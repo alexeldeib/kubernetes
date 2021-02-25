@@ -78,7 +78,7 @@ func New(config *azclients.ClientConfig) *Client {
 }
 
 // Get gets a AgentPool.
-func (c *Client) Get(ctx context.Context, resourceGroupName, managedClusterName, agentPool string) (containerservice.AgentPool, *retry.Error) {
+func (c *Client) Get(ctx context.Context, resourceGroupName, managedClusterName, agentPoolName string) (containerservice.AgentPool, *retry.Error) {
 	mc := metrics.NewMetricContext("agent_pools", "get", resourceGroupName, c.subscriptionID, "")
 
 	// Report errors if the client is rate limited.
