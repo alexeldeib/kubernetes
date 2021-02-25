@@ -94,7 +94,7 @@ func (c *Client) Get(ctx context.Context, resourceGroupName, managedClusterName,
 		return containerservice.AgentPool{}, rerr
 	}
 
-	result, rerr := c.getAgentPool(ctx, resourceGroupName, managedClusterName)
+	result, rerr := c.getAgentPool(ctx, resourceGroupName, managedClusterName, agentPoolname)
 	mc.Observe(rerr.Error())
 	if rerr != nil {
 		if rerr.IsThrottled() {
@@ -155,7 +155,7 @@ func (c *Client) List(ctx context.Context, resourceGroupName, managedClusterName
 		return nil, rerr
 	}
 
-	result, rerr := c.listAgentPools(ctx, resourceGroupName)
+	result, rerr := c.listAgentPools(ctx, resourceGroupName, managedClusterName)
 	mc.Observe(rerr.Error())
 	if rerr != nil {
 		if rerr.IsThrottled() {
@@ -170,7 +170,7 @@ func (c *Client) List(ctx context.Context, resourceGroupName, managedClusterName
 }
 
 // listAgentPool gets a list of AgentPools in the resource group.
-func (c *Client) listAgentPool(ctx context.Context, resourceGroupName, managedClusterName string) ([]containerservice.AgentPool, *retry.Error) {
+func (c *Client) listAgentPools(ctx context.Context, resourceGroupName, managedClusterName string) ([]containerservice.AgentPool, *retry.Error) {
 	resourceID := fmt.Sprintf("/subscriptions/%s/resourceGroups/%s/providers/Microsoft.ContainerService/managedClusters/%s/agentPools",
 		autorest.Encode("path", c.subscriptionID),
 		autorest.Encode("path", resourceGroupName),
