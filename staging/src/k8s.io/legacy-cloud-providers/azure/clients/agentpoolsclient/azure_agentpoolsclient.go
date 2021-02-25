@@ -94,7 +94,7 @@ func (c *Client) Get(ctx context.Context, resourceGroupName, managedClusterName,
 		return containerservice.AgentPool{}, rerr
 	}
 
-	result, rerr := c.getAgentPool(ctx, resourceGroupName, managedClusterName, agentPoolname)
+	result, rerr := c.getAgentPool(ctx, resourceGroupName, managedClusterName, agentPoolName)
 	mc.Observe(rerr.Error())
 	if rerr != nil {
 		if rerr.IsThrottled() {
